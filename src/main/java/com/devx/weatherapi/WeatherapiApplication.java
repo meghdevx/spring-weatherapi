@@ -18,15 +18,21 @@ public class WeatherapiApplication {
 		SpringApplication.run(WeatherapiApplication.class, args);
 	}
 
-	//Get fake weather
-	@GetMapping(value="weather")
-	public Weather getWeather(@RequestParam(value = "location", defaultValue = "kolkata") String location) {
-		return new Weather(location, String.format(template, location, Helper.getRandomMinMax(0, 40)));
+	//Get Base Page
+	@GetMapping(value = "/")
+	public String home() {
+		return String.format("Welcome to Weather API");
 	}
 
 	//Ping
 	@GetMapping(value = "ping")
 	public String ping(){
 		return String.format("pong");
+	}
+
+	//Get fake weather
+	@GetMapping(value="weather")
+	public Weather getWeather(@RequestParam(value = "location", defaultValue = "kolkata") String location) {
+		return new Weather(location, String.format(template, location, Helper.getRandomMinMax(0, 40)));
 	}
 }
